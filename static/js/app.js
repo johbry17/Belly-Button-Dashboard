@@ -1,51 +1,38 @@
 // use d3 to read in samples.json from "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json"
 source = 'https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json';
-data = d3.json(source).then(function(data){
-    console.log(data);
+d3.json(source).then(function(data){
 
-    // dropdown menu
-    // select html element
-    let dropdown = document.getElementById("selDataset");
-    // loop over names to create dropdown names
-    data.names.forEach((id) => {
-        // create html option tag
-        option = document.createElement("option");
-        // set value and text
-        option.value = id;
-        option.text = id;
-        // add to dropdown menu
-        dropdown.appendChild(option);
+    // populate dropdown menu
+    data.names.forEach((name) => {
+        d3.select("#selDataset").append("option").text(name);
     });
 
     // select default
     let bellyButton = data.samples.filter(sample => sample.id === '940')[0];
     //call barChart function
     barChart(topTen(bellyButton));
+    bubbleChart(bellyButton);
 });
 
 
 function topTen(bellyButton) {
 
     // select topTen data
-    sortable = bellyButton.sample_values.map((value, index) => ({
+    // note: data is already sorted by sample_values
+    data = bellyButton.sample_values.map((value, index) => ({
         sample_value: value,
         otu_id: bellyButton.otu_ids[index],
         otu_label: bellyButton.otu_labels[index],
     }));
 
-    // sort the data
-    sorted = sortable.sort((a, b) => b.sample_value - a.sample_value);
-
-    // slice the top ten, reverse the sort order
-    let topTen = sorted.slice(0, 10).reverse();
+    // slice the top ten, reverse the sort order for plotly
+    let topTen = data.slice(0, 10).reverse();
 
     return topTen;
 };
 
 
 // create horizontal bar chart with dropdown menu to show top 10 OTUs
-//     id #bar
-//     x = sample_values; y = otu_ids; hovertext of otu_labels
 function barChart(topTen){
 
     let trace = {
@@ -68,7 +55,28 @@ function barChart(topTen){
 // create bubble chart that displays each sample
     // id #bubble
     // x = otu_ids; y = sample_values; marker size = sample_values; color = otu_ids; text = otu_labels
+function bubbleChart(thing){
+    console.log(thing);
 
+    let trace = {
+        x: thing.otu_ids,
+        y: thing.sample_values,
+        text: thing.otu_labels,
+        mode: 'markers',
+        marker: {
+            size: thing.sample_values,
+            color: thing.otu_ids,
+            colorscale: 'Viridis',
+        },
+    };
+
+    let layout = {
+        title: 'All OTU\'s'
+    };
+
+    Plotly.newPlot("bubble", [trace], layout);
+
+};
 
 // display metadata (demographic data) - each key: value pair
     // id #sample-metadata
