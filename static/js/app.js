@@ -9,9 +9,12 @@ d3.json(source).then(function(data){
 
     // select default
     let bellyButton = data.samples.filter(sample => sample.id === '940')[0];
-    //call barChart function
+    let meta = data.metadata.filter(sample => sample.id === 940)[0];
+    console.log(meta);
+    //call chart functions
     barChart(topTen(bellyButton));
     bubbleChart(bellyButton);
+    metaData(meta);
 });
 
 
@@ -56,7 +59,6 @@ function barChart(topTen){
     // id #bubble
     // x = otu_ids; y = sample_values; marker size = sample_values; color = otu_ids; text = otu_labels
 function bubbleChart(thing){
-    console.log(thing);
 
     let trace = {
         x: thing.otu_ids,
@@ -79,7 +81,13 @@ function bubbleChart(thing){
 };
 
 // display metadata (demographic data) - each key: value pair
-    // id #sample-metadata
+function metaData(thing) {
+
+    Object.entries(thing).forEach(([key, value]) => {
+        d3.select('#sample-metadata').append('p').text(`${key}: ${value}`);
+    });
+};
+
 
 
 // // update all plots in real times as new data is selected
