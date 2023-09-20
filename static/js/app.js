@@ -1,6 +1,11 @@
+let jsonData;
+
 // use d3 to read in samples.json from "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json"
 source = 'https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json';
 d3.json(source).then(function(data){
+
+    // store data for use outside of d3
+    jsonData = data;
 
     // populate dropdown menu
     data.names.forEach((name) => {
@@ -10,11 +15,16 @@ d3.json(source).then(function(data){
     // select default
     let bellyButton = data.samples.filter(sample => sample.id === '940')[0];
     let meta = data.metadata.filter(sample => sample.id === 940)[0];
-    console.log(meta);
+
     //call chart functions
     barChart(topTen(bellyButton));
     bubbleChart(bellyButton);
     metaData(meta);
+    washGauge(meta);
+
+    d3.select("#selDataset").on("change", function() {
+        optionChanged(this.value);
+    });
 });
 
 
@@ -83,6 +93,9 @@ function bubbleChart(thing){
 // display metadata (demographic data) - each key: value pair
 function metaData(thing) {
 
+    // clear existing content
+    d3.select('#sample-metadata').html("");
+
     Object.entries(thing).forEach(([key, value]) => {
         d3.select('#sample-metadata').append('p').text(`${key}: ${value}`);
     });
@@ -91,11 +104,16 @@ function metaData(thing) {
 
 
 // // update all plots in real times as new data is selected
-// function optionChanged(thing) {
-//     thing = String(thing);
-//     let bellyButton = data.samples.find(sample => sample.id === thing);
-//     barChart(bellyButton);
-// };
+// add a d3.selectAll().on("click", optionChanged(thing)) above
+function optionChanged(thing) {
+    let bellyButton = jsonData.samples.find(sample => sample.id === thing);
+    let meta = jsonData.metadata.find(sample => sample.id === parseInt(thing));
+    console.log(bellyButton);
+    barChart(topTen(bellyButton));
+    bubbleChart(bellyButton);
+    metaData(meta);
+    washGauge(meta);
+};
 
 // feel free to get creative with dashboard formatting
 
@@ -104,11 +122,34 @@ function metaData(thing) {
 
 
 // optional: create belly button washing frequency gauge
-// id #gauge
-// put in separate bonus.js file
+function washGauge(thing) {
+    console.log(thing);
+    let colors = ["#ff0000", "#ff4000", "#ff8000", "#ffbf00", "#ffff00", "#bfff00", "#80ff00", "#40ff00", "#00ff00", "#00ff40"];
+    let bins = ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", "9-10"];
 
+    // define steps
+    let steps = bins.map((bin, i) => ({
+        range: [i, i + 1],
+        color: colors[i],
+        text: bin,
+    }));
+    console.log(steps);
 
-// samples is a {dict of three keys, 
-// names [a list], 
-// metadata [a list of {dicts}, 
-// and samples [another list of {dicts}]]}
+    let trace = {
+        value: thing.wfreq,
+        type: "indicator",
+        mode: "gauge+number",
+        gauge: {
+            axis: { range: [null, 9] },
+            steps: steps,
+            textinfo: "text+value",
+            // bar: { color: "black" },
+        },
+    };
+
+    let layout = {
+        title: "Washing Frequency",
+    };
+
+    Plotly.newPlot("gauge", [trace], layout);
+};
