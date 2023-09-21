@@ -57,7 +57,12 @@ function barChart(bellyButton){
 
     // create layout
     let layout = {
-        title: 'Top Ten OTUs',
+        title: {
+            text: '<b>Top Ten OTU\'s</b>',
+            font: {
+                size: 24,
+            }
+        }
     };
 
     // plot chart
@@ -84,7 +89,15 @@ function bubbleChart(bellyButton){
 
     // set layout
     let layout = {
-        title: 'All OTU\'s'
+        title: {
+            text: '<b>All OTU\'s</b>',
+            font: {
+                size: 24,
+            }
+        },
+        xaxis: {
+            title: `OTU ID`,
+        }
     };
 
     //plot chart
@@ -102,7 +115,7 @@ function metaData(person) {
     // populate the table   
     Object.keys(person).forEach((key) => {
         value = person[key];
-        d3.select('#sample-metadata').append('p').text(`${key}: ${value}`);
+        d3.select('#sample-metadata').append('p').html(`<b>${key}:</b> ${value}`);
     });
 };
 
@@ -110,15 +123,13 @@ function metaData(person) {
 // optional: create belly button washing frequency gauge
 function washGauge(thing) {
     
-    // set colors and bins for steps
-    let colors = ["#ff0000", "#ff4000", "#ff8000", "#ffbf00", "#ffff00", "#bfff00", "#80ff00", "#40ff00", "#00ff00"];
-    let bins = ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9"];
+    // set colors for steps, inspired by Viridis for consistency with bubble chart
+    let colors = ["#440154", "#482475", "#414487", "#355F8D", "#2A7F8E", "#21918C", "#25A979", "#3DCD60", "#85E96E"];
 
     // define steps
-    let steps = bins.map((bin, i) => ({
+    let steps = colors.map((color, i) => ({
         range: [i, i + 1],
-        color: colors[i],
-        text: bin,
+        color: color,
     }));
 
     // define trace
@@ -127,15 +138,20 @@ function washGauge(thing) {
         type: "indicator",
         mode: "gauge+number",
         gauge: {
-            axis: { range: [null, 9] },
+            axis: { range: [null, 9], tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] },
             steps: steps,
-            textinfo: "text+value",
-            // bar: { color: "black" },
+            bar: { color: "white" },
         },
     };
 
+    // set layout
     let layout = {
-        title: "Washing Frequency",
+        title: {
+            text: '<b>Belly Button Washing Frequency</b><br>Scrubs per Week',
+            font: {
+                size: 24,
+            }
+        }
     };
 
     Plotly.newPlot("gauge", [trace], layout);
