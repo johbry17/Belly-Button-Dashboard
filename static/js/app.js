@@ -12,17 +12,16 @@ d3.json(source).then(function(data){
         d3.select("#selDataset").append("option").text(name);
     });
 
-    // set default, which populates plots
-    d3.select('#selDataset').property('value', '940').dispatch('change');
+    // set default, which populates plots    
+    let choice = d3.select('select').node().value;
+    optionChanged(choice);
 
-    // change plots dynamically when dropdown menu changes
-    d3.select("#selDataset").on("change", function() {
-        optionChanged(this.value);
-    });
+    // Alternate version -
+    // d3.select('#selDataset').property('value').dispatch('change');
 });
 
 
-// // update all plots as new data is selected
+// // dynamically update all plots as new data is selected
 function optionChanged(id) {
 
     // select data
@@ -140,7 +139,7 @@ function washGauge(thing) {
         gauge: {
             axis: { range: [null, 9], tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] },
             steps: steps,
-            bar: { color: "white" },
+            bar: { color: "orangered" },
         },
     };
 
@@ -154,5 +153,6 @@ function washGauge(thing) {
         }
     };
 
+    // plot chart
     Plotly.newPlot("gauge", [trace], layout);
 };
