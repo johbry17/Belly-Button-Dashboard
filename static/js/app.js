@@ -12,120 +12,107 @@ d3.json(source).then(function(data){
         d3.select("#selDataset").append("option").text(name);
     });
 
-    // select default
-    let bellyButton = data.samples.filter(sample => sample.id === '940')[0];
-    let meta = data.metadata.filter(sample => sample.id === 940)[0];
+    // set default, which populates plots
+    d3.select('#selDataset').property('value', '940').dispatch('change');
 
-    //call chart functions
-    barChart(topTen(bellyButton));
-    bubbleChart(bellyButton);
-    metaData(meta);
-    washGauge(meta);
-
+    // change plots dynamically when dropdown menu changes
     d3.select("#selDataset").on("change", function() {
         optionChanged(this.value);
     });
 });
 
 
-function topTen(bellyButton) {
+// // update all plots as new data is selected
+function optionChanged(id) {
 
-    // select topTen data
-    // note: data is already sorted by sample_values
-    data = bellyButton.sample_values.map((value, index) => ({
-        sample_value: value,
-        otu_id: bellyButton.otu_ids[index],
-        otu_label: bellyButton.otu_labels[index],
-    }));
-
-    // slice the top ten, reverse the sort order for plotly
-    let topTen = data.slice(0, 10).reverse();
-
-    return topTen;
-};
-
-
-// create horizontal bar chart with dropdown menu to show top 10 OTUs
-function barChart(topTen){
-
-    let trace = {
-        x: topTen.map(sample => sample.sample_value),
-        y: topTen.map(sample => `OTU ${sample.otu_id}`),
-        text: topTen.map(sample => sample.otu_label),
-        type: 'bar',
-        orientation: 'h',
-    };
-
-    let layout = {
-        title: 'Top Ten OTUs',
-    };
-
-    Plotly.newPlot("bar", [trace], layout);
-
-};
-
-
-// create bubble chart that displays each sample
-    // id #bubble
-    // x = otu_ids; y = sample_values; marker size = sample_values; color = otu_ids; text = otu_labels
-function bubbleChart(thing){
-
-    let trace = {
-        x: thing.otu_ids,
-        y: thing.sample_values,
-        text: thing.otu_labels,
-        mode: 'markers',
-        marker: {
-            size: thing.sample_values,
-            color: thing.otu_ids,
-            colorscale: 'Viridis',
-        },
-    };
-
-    let layout = {
-        title: 'All OTU\'s'
-    };
-
-    Plotly.newPlot("bubble", [trace], layout);
-
-};
-
-// display metadata (demographic data) - each key: value pair
-function metaData(thing) {
-
-    // clear existing content
-    d3.select('#sample-metadata').html("");
-
-    Object.entries(thing).forEach(([key, value]) => {
-        d3.select('#sample-metadata').append('p').text(`${key}: ${value}`);
-    });
-};
-
-
-
-// // update all plots in real times as new data is selected
-// add a d3.selectAll().on("click", optionChanged(thing)) above
-function optionChanged(thing) {
-    let bellyButton = jsonData.samples.find(sample => sample.id === thing);
-    let meta = jsonData.metadata.find(sample => sample.id === parseInt(thing));
-    console.log(bellyButton);
-    barChart(topTen(bellyButton));
+    // select data
+    let bellyButton = jsonData.samples.find(sample => sample.id === id);
+    let meta = jsonData.metadata.find(sample => sample.id === parseInt(id));
+    
+    // update plots
+    barChart(bellyButton);
     bubbleChart(bellyButton);
     metaData(meta);
     washGauge(meta);
 };
 
-// feel free to get creative with dashboard formatting
+
+// create horizontal bar chart with dropdown menu to show top 10 OTUs
+function barChart(bellyButton){
+
+    // slice off top Ten, reverse order for plotly
+    // note that sample_values are already sorted in descending order
+    let topTen = bellyButton.sample_values.slice(0, 10).reverse();
+    let labels = bellyButton.otu_labels.slice(0, 10).reverse();
+
+    // create trace
+    let trace = {
+        x: topTen,
+        //.slice().reverse() to create a copy of the array and reverse it
+        y: labels.map((label, index) => `OTU ${bellyButton.otu_ids[index]}`).slice().reverse(),
+        text: labels,
+        type: 'bar',
+        orientation: 'h',
+    };
+
+    // create layout
+    let layout = {
+        title: 'Top Ten OTUs',
+    };
+
+    // plot chart
+    Plotly.newPlot("bar", [trace], layout);
+
+};
 
 
-// deploy to gitHub Pages
+// create bubble chart that displays all sample values
+function bubbleChart(bellyButton){
+
+    // create trace
+    let trace = {
+        x: bellyButton.otu_ids,
+        y: bellyButton.sample_values,
+        text: bellyButton.otu_labels,
+        mode: 'markers',
+        marker: {
+            size: bellyButton.sample_values,
+            color: bellyButton.otu_ids,
+            colorscale: 'Viridis',
+        },
+    };
+
+    // set layout
+    let layout = {
+        title: 'All OTU\'s'
+    };
+
+    //plot chart
+    Plotly.newPlot("bubble", [trace], layout);
+
+};
+
+
+// display metadata (demographic data) - each key: value pair
+function metaData(person) {
+
+    // clear existing content
+    d3.select('#sample-metadata').html("");
+
+    // populate the table   
+    Object.keys(person).forEach((key) => {
+        value = person[key];
+        d3.select('#sample-metadata').append('p').text(`${key}: ${value}`);
+    });
+};
 
 
 // optional: create belly button washing frequency gauge
 function washGauge(thing) {
-    console.log(thing);
-    let colors = ["#ff0000", "#ff4000", "#ff8000", "#ffbf00", "#ffff00", "#bfff00", "#80ff00", "#40ff00", "#00ff00", "#00ff40"];
-    let bins = ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", "9-10"];
+    
+    // set colors and bins for steps
+    let colors = ["#ff0000", "#ff4000", "#ff8000", "#ffbf00", "#ffff00", "#bfff00", "#80ff00", "#40ff00", "#00ff00"];
+    let bins = ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9"];
 
     // define steps
     let steps = bins.map((bin, i) => ({
@@ -133,8 +120,8 @@ function washGauge(thing) {
         color: colors[i],
         text: bin,
     }));
-    console.log(steps);
 
+    // define trace
     let trace = {
         value: thing.wfreq,
         type: "indicator",
