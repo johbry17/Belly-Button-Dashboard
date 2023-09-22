@@ -56,6 +56,7 @@ function barChart(bellyButton) {
       text: "<b>Top Ten OTU's</b>",
       font: {size: 24,},
     },
+    xaxis: {title: "<b>Number of Samples Found</b>"},
   };
 
   // plot chart

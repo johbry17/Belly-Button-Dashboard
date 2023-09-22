@@ -1,38 +1,33 @@
-# Belly Button Dashboard
+# Module 14 Challenge, 25 September 2023, Javascript and Plotly, Belly Button Dashboard
 
+Development on this project has stopped.
 
 ## Description
-Creates a website that offers a series of visualizations that depict the type of bacteria found in various subject's belly buttons
 
-![app_image](pictures)
-
-## Table of Contents
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
-- [Features](#features)
-- [Tests](#tests)
-- [Contact](#contact)
-
-## Installation
-N/A
+Builds an interactive dashboard to dynamically explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/) that offers a series of visualizations that depict the type of bacteria found in various people's belly buttons. The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
 ## Usage
-See page link here. Choose from dropdown menu to display different results.
 
-## Credits
-Bryan Johns
+See page link [here](https://johbry17.github.io/14-belly-button-biodiversity-plotly-javascript/). Choose from the dropdown menu to display different results for different test subjects.
 
+## Sample Gallery
 
+Default (subject 940):
 
-## Features
-N/A
+![Default Image](static/Images/bellyButtonDefault.png)
 
-## Tests
-N/A
+Example (subject 955):
 
-## Contact
-If there are any questions of concerns, I can be reached at:
-##### [github: johbry17](https://github.com/johbry17)
-##### [email: N/A](mailto:N/A)
+![A different sample](static/Images/bellyButton2.png)
+
+## References
+
+Hulcr, J. et al. (2012) A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable. Retrieved from: http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/Links to an external site.
+
+## Acknowledgements
+
+Thanks to Geronimo Perez for feedback and assistance
+
+## Author
+
+Bryan Johns, September, 2023
