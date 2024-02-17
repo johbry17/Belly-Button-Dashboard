@@ -17,7 +17,7 @@ Builds an interactive dashboard to dynamically explore the [Belly Button Biodive
 
 ## Usage
 
-Use page link [here](https://johbry17.github.io/14-belly-button-biodiversity-plotly-javascript/). Choose from the dropdown menu to display different results for different test subjects.
+Use page link [here](https://johbry17.github.io/14-belly-button-biodiversity-plotly-javascript/)). Choose from the dropdown menu to display different results for different test subjects.
 
 ## Sample Gallery
 
