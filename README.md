@@ -1,4 +1,4 @@
-# Module 14 Challenge, 25 September 2023, Javascript and Plotly, Belly Button Dashboard
+# Belly Button Dashboard with JavaScript and Plotly
 
 Link to webpage: https://johbry17.github.io/14-belly-button-biodiversity-plotly-javascript/
 
