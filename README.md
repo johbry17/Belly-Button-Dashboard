@@ -4,6 +4,13 @@ Link to webpage: https://johbry17.github.io/14-belly-button-biodiversity-plotly-
 
 Development on this project has stopped.
 
+- [Description](#description)
+- [Usage](#usage)
+- [Sample Gallery](#sample-gallery)
+- [References](#references)
+- [Acknowledgements](#acknowledgements)
+- [Author](#author)
+
 ## Description
 
 Builds an interactive dashboard to dynamically explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/) that offers a series of visualizations that depict the type of bacteria found in various people's belly buttons. The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
