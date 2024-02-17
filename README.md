@@ -1,6 +1,6 @@
 # Belly Button Dashboard with JavaScript and Plotly
 
-Link to webpage: https://johbry17.github.io/14-belly-button-biodiversity-plotly-javascript/
+Link to webpage: https://johbry17.github.io/Belly-Button-Dashboard/
 
 Development on this project has stopped.
 
