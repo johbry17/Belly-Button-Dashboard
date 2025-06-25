@@ -1,25 +1,50 @@
 # Belly Button Dashboard with JavaScript and Plotly
 
-Link to webpage: https://johbry17.github.io/Belly-Button-Dashboard/
+*Interactive data visualization meets microbiome curiosity—with JavaScript and Plotly.*
 
-Development on this project has stopped.
+🔗 [Live Website](https://johbry17.github.io/Belly-Button-Dashboard/)
 
-- [Description](#description)
+> ⚠️ This project is archived and no longer actively maintained, but remains available as a portfolio example.
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Tools & Technologies](#tools--technologies)
 - [Usage](#usage)
-- [Sample Gallery](#sample-gallery)
+- [Gallery](#gallery)
 - [References](#references)
 - [Acknowledgements](#acknowledgements)
 - [Author](#author)
 
-## Description
+## Project Overview
 
-Builds an interactive dashboard to dynamically explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/) that offers a series of visualizations that depict the type of bacteria found in various people's belly buttons. The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
+This interactive dashboard visualizes microbial biodiversity in human belly buttons using data from a public science outreach project by [NC State University](http://robdunnlab.com/projects/belly-button-biodiversity/). Each test subject’s microbial profile is represented through dynamic charts built with JavaScript, D3.js, and Plotly.
+
+The project blends science communication with code, making complex biological data accessible and engaging. Users can explore the diversity of bacterial species (OTUs) found in individuals’ navels, and even see how frequently they wash.
+
+## Features
+
+- 🧬 Dynamic dropdown menu to toggle between individual test subjects  
+- 📊 Bar chart of the top 10 OTUs per subject  
+- 🫧 Bubble chart showing OTU distribution and abundance  
+- ⏱️ Gauge chart displaying belly button washing frequency  
+- 📱 Responsive layout with Bootstrap  
+
+## Tools & Technologies
+
+- JavaScript  
+- Plotly.js  
+- D3.js  
+- HTML / CSS  
+- Bootstrap  
 
 ## Usage
 
-Use page link [here](https://johbry17.github.io/Belly-Button-Dashboard/). Choose from the dropdown menu to display different results for different test subjects.
+Use the live site [here](https://johbry17.github.io/Belly-Button-Dashboard/).  
+Select a test subject from the dropdown menu to update all visualizations accordingly.
 
-## Sample Gallery
+## Gallery
 
 Default (subject 940):
 
@@ -31,12 +56,16 @@ Example (subject 955):
 
 ## References
 
-Hulcr, J. et al. (2012) A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable. Retrieved from: http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/.
+Hulcr, J. et al. (2012). *A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable.*  
+Retrieved from: [http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/](http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/)
+
 
 ## Acknowledgements
 
-Thanks to Geronimo Perez for feedback and assistance
+Thanks to Geronimo Perez for feedback and assistance during development.
 
 ## Author
 
-Bryan Johns, September, 2023
+
+Bryan Johns, September 2023  
+[LinkedIn](https://www.linkedin.com/in/bryanjohns/) | [GitHub Portfolio](https://github.com/johbry17)
