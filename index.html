@@ -1,58 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bellybutton Biodiversity</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="icon" type="image/x-icon" href="./static/Images/favicon.ico" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bellybutton Biodiversity</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="icon" type="image/x-icon" href="./static/Images/favicon.ico" />
-</head>
-
-<body>
-
-  <br>
-  <div class="container">
-    <div class="row">
-      <!-- adding a background image and related CSS -->
-      <div class="col-md-12 jumbotron text-center" style="background-image: url('background.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center center">
-        <h1 style="color: white">Belly Button Biodiversity Dashboard</h1>
-        <p style="color: white">Use the interactive charts below to explore the dataset</p>
-        <h6 style="color: white">**OTU = Operational Taxonomic Unit, biology term, in this case representing different species of bacteria in the microbiome of the human belly button</h6>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="well">
-          <h5>Test Subject ID No.:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+  <body>
+    <br />
+    <div class="container">
+      <div class="row">
+        <!-- adding a background image and related CSS -->
+        <div
+          class="col-md-12 jumbotron text-center"
+          style="
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+          "
+        >
+          <h1 style="color: white">Belly Button Biodiversity Dashboard</h1>
+          <p style="color: white">
+            Use the interactive charts below to explore the dataset
+          </p>
+          <h6 style="color: white">
+            **OTU = Operational Taxonomic Unit, biology term, in this case
+            representing different species of bacteria in the microbiome of the
+            human belly button
+          </h6>
         </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Demographic Info</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="well">
+            <h5>Test Subject ID No.:</h5>
+            <select
+              id="selDataset"
+              onchange="optionChanged(this.value)"
+            ></select>
           </div>
-          <div id="sample-metadata" class="panel-body"></div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Demographic Info</h3>
+            </div>
+            <div id="sample-metadata" class="panel-body"></div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div id="bar"></div>
+        </div>
+        <div class="col-md-5">
+          <div id="gauge"></div>
         </div>
       </div>
-      <div class="col-md-5">
-        <div id="bar"></div>
-      </div>
-      <div class="col-md-5">
-        <div id="gauge"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="bubble"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="bubble"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="./static/js/app.js"></script>
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <span class="footer-owner">
+        &copy; <span id="copyright-year">2025</span>
+        <span class="footer-author">Bryan C. Johns</span>
+      </span>
+      <span class="footer-links">
+        <a
+          href="https://johbry17.github.io/portfolio/index.html"
+          target="_blank"
+          class="portfolio-link"
+          aria-label="Portfolio"
+        >
+          <i
+            class="fas fa-laptop-code footer-icon"
+            aria-hidden="true"
+            title="Portfolio"
+          ></i
+          >Portfolio
+        </a>
+        <a
+          href="https://www.linkedin.com/in/b-johns/"
+          target="_blank"
+          class="linkedin-link"
+          aria-label="LinkedIn"
+        >
+          <i
+            class="fab fa-linkedin footer-icon"
+            aria-hidden="true"
+            title="LinkedIn"
+          ></i
+          >LinkedIn
+        </a>
+        <a
+          href="https://github.com/johbry17/Belly-Button-Dashboard"
+          target="_blank"
+          class="github-link"
+          aria-label="GitHub"
+        >
+          <i
+            class="fab fa-github footer-icon"
+            aria-hidden="true"
+            title="GitHub"
+          ></i
+          >GitHub
+        </a>
+      </span>
+    </footer>
+    <script>
+      // Auto-update year
+      const yearElement = document.getElementById("copyright-year");
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+    </script>
 
-</body>
-
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="./static/js/app.js"></script>
+  </body>
 </html>
