@@ -4,7 +4,7 @@
 
 🔗 [Live Website](https://johbry17.github.io/Belly-Button-Dashboard/)
 
-> ⚠️ This project is archived and no longer actively maintained, but remains available as a portfolio example.
+> ℹ️ This project is archived and no longer actively maintained, but remains available as a portfolio example.
 
 ## Table of Contents
 
@@ -25,11 +25,11 @@ The project blends science communication with code, making complex biological da
 
 ## Features
 
-- 🧬 Dynamic dropdown menu to toggle between individual test subjects  
-- 📊 Bar chart of the top 10 OTUs per subject  
-- 🫧 Bubble chart showing OTU distribution and abundance  
-- ⏱️ Gauge chart displaying belly button washing frequency  
-- 📱 Responsive layout with Bootstrap  
+- Dynamic dropdown menu to toggle between individual test subjects  
+- Bar chart of the top 10 OTUs per subject  
+- Bubble chart showing OTU distribution and abundance  
+- Gauge chart displaying belly button washing frequency  
+- Responsive layout with Bootstrap  
 
 ## Tools & Technologies
 
