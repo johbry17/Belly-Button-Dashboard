@@ -69,4 +69,4 @@ Thanks to Geronimo Perez for feedback and assistance during development.
 
 Bryan Johns, September 2023  
 [bryan.johns@informedwanderer.com](mailto:bryan.johns@informedwanderer.com) | [LinkedIn](https://www.linkedin.com/in/b-johns/) | [GitHub](https://github.com/johbry17) | [Portfolio](https://informedwanderer.com)  
-— Data fluent, human literate.
+— Fluent in Data. Fluent in Human.
